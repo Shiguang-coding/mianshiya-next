@@ -29,10 +29,10 @@ public class CodeGenerator {
      */
     public static void main(String[] args) throws TemplateException, IOException {
         // 指定生成参数
-        String packageName = "com.shiguang.mianshiya";
-        String dataName = "用户评论";
-        String dataKey = "userComment";
-        String upperDataKey = "UserComment";
+        String packageName = "com.shiguang.mianshiya"; // 包名
+        String dataName = "题库题目";
+        String dataKey = "questionbankquestion"; //vo、dto次级包名
+        String upperDataKey = "QuestionBankQuestion"; // 注意，这里需要保持首字母大写
 
         // 封装生成参数
         Map<String, Object> dataModel = new HashMap<>();
@@ -42,7 +42,7 @@ public class CodeGenerator {
         dataModel.put("upperDataKey", upperDataKey);
 
         // 生成路径默认值
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = System.getProperty("user.dir") + File.separator + "mianshiya-next-backend";
         // 参考路径，可以自己调整下面的 outputPath
         String inputPath = projectPath + File.separator + "src/main/resources/templates/模板名称.java.ftl";
         String outputPath = String.format("%s/generator/包名/%s类后缀.java", projectPath, upperDataKey);

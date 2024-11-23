@@ -1,7 +1,8 @@
 package com.shiguang.mianshiya.service;
 
-import com.shiguang.mianshiya.model.entity.User;
 import javax.annotation.Resource;
+
+import com.shiguang.mianshiya.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

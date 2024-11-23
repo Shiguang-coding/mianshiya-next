@@ -3,8 +3,10 @@ package com.shiguang.mianshiya.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shiguang.mianshiya.model.entity.Post;
+
 import javax.annotation.Resource;
+
+import com.shiguang.mianshiya.model.entity.Post;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

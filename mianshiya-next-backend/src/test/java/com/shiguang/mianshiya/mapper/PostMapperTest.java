@@ -1,9 +1,10 @@
 package com.shiguang.mianshiya.mapper;
 
-import com.shiguang.mianshiya.model.entity.Post;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.shiguang.mianshiya.model.entity.Post;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

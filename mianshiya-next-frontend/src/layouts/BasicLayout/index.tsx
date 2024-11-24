@@ -1,15 +1,21 @@
 "use client";
 
-import {GithubFilled, LogoutOutlined, SearchOutlined,} from "@ant-design/icons";
-import {ProLayout} from "@ant-design/pro-components";
-import {Dropdown, Input} from "antd";
+import {
+  GithubFilled,
+  LogoutOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import { ProLayout } from "@ant-design/pro-components";
+import { Dropdown, Input } from "antd";
 import React from "react";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
 import "./index.css";
 import menus from "../../../config/menu";
+import { useSelector } from "react-redux";
+import { RootState } from "@/stores";
 
 /**
  * 搜索条
@@ -54,6 +60,9 @@ interface Props {
  */
 export default function BasicLayout({ children }: Props) {
   const pathname = usePathname(); //仅适用于客户端渲染
+
+  const loginUser = useSelector((state: RootState) => state.loginUser);
+
   return (
     <div
       id="basicLayout"
@@ -77,9 +86,9 @@ export default function BasicLayout({ children }: Props) {
           pathname,
         }}
         avatarProps={{
-          src: "https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg",
+          src: loginUser.userAvatar || "/assets/notLoginUser.png",
           size: "small",
-          title: "時光",
+          title: loginUser.userName || "時光",
           render: (props, dom) => {
             return (
               <Dropdown
@@ -132,7 +141,7 @@ export default function BasicLayout({ children }: Props) {
         onMenuHeaderClick={(e) => console.log(e)}
         // 定义有哪些菜单
         menuDataRender={() => {
-          return menus
+          return menus;
         }}
         // 定义了菜单项如何渲染
         menuItemRender={(item, dom) => (

@@ -1,7 +1,50 @@
+"use client";
+
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import BasicLayout from "@/src/layouts/BasicLayout";
-import React from "react";
+import BasicLayout from "@/layouts/BasicLayout";
+import React, { useCallback, useEffect } from "react";
 import "./globals.css";
+import {Provider, useDispatch} from "react-redux";
+import store, {AppDispatch} from "@/stores";
+import { getLoginUserUsingGet } from "@/api/userController";
+import {setLoginUser} from "@/stores/loginUser";
+
+/**
+ * 执行初始化逻辑的布局（多封装一层）
+ * @param children
+ * @constructor
+ */
+const InitLayout: React.FC<
+  Readonly<{
+    children: React.ReactNode;
+  }>
+> = ({ children }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  // 初始化全局用户状态
+  const doInitLoginUser = useCallback(async () => {
+    const res = await getLoginUserUsingGet();
+    if (res.data) {
+      // 更新全局用户状态
+    } else {
+      // setTimeout(() => {
+      //   const testUser = {
+      //     userName: "测试登录",
+      //     id: 888,
+      //     userAvatar: "/assets/logo.png",
+      //   };
+      //   dispatch(setLoginUser(testUser))
+      // }, 3000);
+    }
+    console.log("hello 欢迎来到我的项目");
+  }, []);
+
+  // 只执行一次
+  useEffect(() => {
+    doInitLoginUser();
+  }, []);
+
+  return <>{children}</>;
+};
 
 export default function RootLayout({
   children,
@@ -12,7 +55,11 @@ export default function RootLayout({
     <html lang="zh">
       <body>
         <AntdRegistry>
-          <BasicLayout>{children}</BasicLayout>
+          <Provider store={store}>
+            <InitLayout>
+              <BasicLayout>{children}</BasicLayout>
+            </InitLayout>
+          </Provider>
         </AntdRegistry>
       </body>
     </html>

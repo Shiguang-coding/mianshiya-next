@@ -1,13 +1,13 @@
 "use client";
 
-import { AntdRegistry } from "@ant-design/nextjs-registry";
+import {AntdRegistry} from "@ant-design/nextjs-registry";
 import BasicLayout from "@/layouts/BasicLayout";
-import React, { useCallback, useEffect } from "react";
+import React, {useCallback, useEffect} from "react";
 import "./globals.css";
 import {Provider, useDispatch} from "react-redux";
 import store, {AppDispatch} from "@/stores";
-import { getLoginUserUsingGet } from "@/api/userController";
-import {setLoginUser} from "@/stores/loginUser";
+import {getLoginUserUsingGet} from "@/api/userController";
+import AccessLayout from "@/access/AccessLayout";
 
 /**
  * 执行初始化逻辑的布局（多封装一层）
@@ -31,6 +31,7 @@ const InitLayout: React.FC<
       //     userName: "测试登录",
       //     id: 888,
       //     userAvatar: "/assets/logo.png",
+      //     userRole: ACCESS_ENUM.ADMIN
       //   };
       //   dispatch(setLoginUser(testUser))
       // }, 3000);
@@ -57,7 +58,9 @@ export default function RootLayout({
         <AntdRegistry>
           <Provider store={store}>
             <InitLayout>
-              <BasicLayout>{children}</BasicLayout>
+              <BasicLayout>
+                <AccessLayout>{children}</AccessLayout>
+              </BasicLayout>
             </InitLayout>
           </Provider>
         </AntdRegistry>

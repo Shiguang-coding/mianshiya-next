@@ -15,7 +15,6 @@ const menus = [
   {
     path: "/questions",
     name: "题目",
-    access: ACCESS_ENUM.USER,
   },
   {
     path: "https://blog.shiguangdev.cn",
@@ -39,10 +38,19 @@ const menus = [
         name: "用户管理",
         access: ACCESS_ENUM.ADMIN,
       },
+      {
+        path: "/admin/bank",
+        name: "题库管理",
+        access: ACCESS_ENUM.ADMIN,
+      },
+      {
+        path: "/admin/question",
+        name: "题目管理",
+        access: ACCESS_ENUM.ADMIN,
+      },
     ],
   },
 ] as MenuDataItem[];
-
 
 // 根据路径查找所有菜单
 export const findAllMenuItemByPath = (path: string): MenuDataItem | null => {
@@ -51,8 +59,8 @@ export const findAllMenuItemByPath = (path: string): MenuDataItem | null => {
 
 // 根据路径查找菜单
 export const findMenuItemByPath = (
-    menus: MenuDataItem[],
-    path: string,
+  menus: MenuDataItem[],
+  path: string
 ): MenuDataItem | null => {
   for (const menu of menus) {
     if (menu.path === path) {

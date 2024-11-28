@@ -1,2 +1,7 @@
 .md-viewer {
+
+}
+
+.markdown-body{
+    min-height:0;
 }

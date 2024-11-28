@@ -1,13 +1,14 @@
 "use client";
 
-import {AntdRegistry} from "@ant-design/nextjs-registry";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import BasicLayout from "@/layouts/BasicLayout";
-import React, {useCallback, useEffect} from "react";
-import "./globals.css";
-import {Provider, useDispatch} from "react-redux";
-import store, {AppDispatch} from "@/stores";
-import {getLoginUserUsingGet} from "@/api/userController";
+import React, { useCallback, useEffect } from "react";
+import { Provider, useDispatch } from "react-redux";
+import store, { AppDispatch } from "@/stores";
+import { getLoginUserUsingGet } from "@/api/userController";
 import AccessLayout from "@/access/AccessLayout";
+import { setLoginUser } from "@/stores/loginUser";
+import "./globals.css";
 
 /**
  * 执行初始化逻辑的布局（多封装一层）
@@ -25,6 +26,7 @@ const InitLayout: React.FC<
     const res = await getLoginUserUsingGet();
     if (res.data) {
       // 更新全局用户状态
+      dispatch(setLoginUser(res.data));
     } else {
       // setTimeout(() => {
       //   const testUser = {
@@ -36,7 +38,7 @@ const InitLayout: React.FC<
       //   dispatch(setLoginUser(testUser))
       // }, 3000);
     }
-    console.log("hello 欢迎来到我的项目");
+    // console.log("hello 欢迎来到我的项目");
   }, []);
 
   // 只执行一次
